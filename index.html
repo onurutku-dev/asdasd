@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sana Bir Şey Söylemem Lazım...</title>
+    <meta name="description" content="Kalbimden gelen bir mesaj var senin için.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Floating Hearts Background -->
+    <div class="hearts-container" id="heartsContainer"></div>
+    
+    <!-- Star particles -->
+    <canvas id="starsCanvas"></canvas>
+
+    <!-- Hero / Landing Section -->
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="envelope" id="envelope">
+                <div class="envelope-top"></div>
+                <div class="envelope-body">
+                    <span class="envelope-icon">💌</span>
+                </div>
+            </div>
+            <h1 class="hero-title fade-in" id="heroTitle"></h1>
+            <p class="hero-subtitle fade-in delay-1">Açtıysan bi dakika ayır, sonuna kadar oku...</p>
+            <button class="cta-button fade-in delay-2" id="startBtn">
+                <span>Mektubu Aç</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 5v14M19 12l-7 7-7-7"/>
+                </svg>
+            </button>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Letter Section -->
+    <section class="letter-section" id="letterSection">
+        <div class="letter-container">
+            <div class="letter-paper">
+                <div class="letter-stamp">💌</div>
+                <div class="letter-date">18 Mart 2026</div>
+                <div class="letter-greeting">Hey,</div>
+                <div class="letter-body">
+                    <p class="letter-paragraph reveal">
+                        Bunu yazarken ellerim titriyor, yalan yok. Böyle bi mesaj atacağımı hiç 
+                        düşünmezdim ama artık içimde tutamıyorum.
+                    </p>
+                    <p class="letter-paragraph reveal">
+                        Ne kadar salakça davrandığımı biliyorum. Farkındayım her şeyin. 
+                        Gece gözümü kapattığımda aklıma hep "keşke öyle yapmasaydım" diye 
+                        geçiyor, uyuyamıyorum resmen.
+                    </p>
+                    <p class="letter-paragraph reveal">
+                        Seni kaybetmek... hayatımda en çok acı veren şey oldu. Yanımdayken 
+                        ne kadar şanslı olduğumu göremedim. Kabul ediyorum, hata bendeydi.
+                    </p>
+                    <p class="letter-paragraph reveal">
+                        Ama bi şeyi bil: <strong>cidden değiştim.</strong> Lafta değil, gerçekten. 
+                        Kendime çeki düzen verdim — sadece seni geri kazanmak için değil, 
+                        adam gibi bi insan olmak için.
+                    </p>
+                    <p class="letter-paragraph reveal">
+                        Seninle geçen her an hâlâ aklımda. Gülüşün, bakışların, küçücük 
+                        şeylere bile birlikte gülmemiz... Hepsini çok özlüyorum be.
+                    </p>
+                </div>
+                <div class="letter-signature reveal">— seni hâlâ çok seven ben</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memory Timeline -->
+    <section class="memories-section" id="memoriesSection">
+        <h2 class="section-title reveal">Aklımdan Çıkmayan Anlar</h2>
+        <p class="section-subtitle reveal">hepsini tek tek hatırlıyorum...</p>
+        <div class="timeline-mobile">
+            <div class="timeline-line"></div>
+            
+            <div class="memory-card reveal">
+                <div class="memory-dot"></div>
+                <div class="memory-content">
+                    <span class="memory-emoji">🌅</span>
+                    <h3>İlk Karşılaştığımız An</h3>
+                    <p>O gün bi şey değişti bende. Seni gördüm ve dünyam alt üst oldu. O anı ömür boyu hatırlayacağım.</p>
+                </div>
+            </div>
+            
+            <div class="memory-card reveal">
+                <div class="memory-dot"></div>
+                <div class="memory-content">
+                    <span class="memory-emoji">😂</span>
+                    <h3>Saçma Sapan Gülmelerimiz</h3>
+                    <p>En saçma şeylere saatlerce gülerdik ya, hiç kimseyle öyle gülmedim. Seninle her şey eğlenceliydi abi.</p>
+                </div>
+            </div>
+            
+            <div class="memory-card reveal">
+                <div class="memory-dot"></div>
+                <div class="memory-content">
+                    <span class="memory-emoji">🌙</span>
+                    <h3>Sabaha Kadar Muhabbetlerimiz</h3>
+                    <p>Telefonda bi konuşmaya başlıyorduk, bakıyoruz saat 4 olmuş. İkimiz de uyumak istemiyorduk...</p>
+                </div>
+            </div>
+            
+            <div class="memory-card reveal">
+                <div class="memory-dot"></div>
+                <div class="memory-content">
+                    <span class="memory-emoji">💫</span>
+                    <h3>Bize Söz Verdiğimiz An</h3>
+                    <p>Hep birlikte olacağız demiştik. Ben hâlâ o sözün arkasındayım. Bi şans daha ver, bu sefer tutacağım.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apology Section -->
+    <section class="apology-section" id="apologySection">
+        <div class="apology-container">
+            <div class="apology-bg-glow"></div>
+            <div class="apology-card reveal">
+                <div class="apology-icon">🥀</div>
+                <h2>Hepsinin Farkındayım</h2>
+                <div class="apology-reasons">
+                    <div class="reason reveal">
+                        <span class="reason-bullet">💔</span>
+                        <p>Seni üzdüğüm her an için çok pişmanım</p>
+                    </div>
+                    <div class="reason reveal">
+                        <span class="reason-bullet">😔</span>
+                        <p>Seni dinlemem gerekirken dinlemediğim zamanlar için</p>
+                    </div>
+                    <div class="reason reveal">
+                        <span class="reason-bullet">🤦</span>
+                        <p>Kendi kafama göre takıldığım, seni düşünmediğim anlar için</p>
+                    </div>
+                    <div class="reason reveal">
+                        <span class="reason-bullet">😢</span>
+                        <p>Yanımdayken kıymetini bilmediğim için</p>
+                    </div>
+                    <div class="reason reveal">
+                        <span class="reason-bullet">💧</span>
+                        <p>Hak ettiğin ilgiyi, sevgiyi gösteremediğim için</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promise Section -->
+    <section class="promise-section" id="promiseSection">
+        <div class="promise-container">
+            <h2 class="section-title reveal">Bu Sefer Farklı Olacak</h2>
+            <p class="section-subtitle reveal">söz veriyorum, bu sefer gerçekten</p>
+            <div class="promises-grid">
+                <div class="promise-card reveal">
+                    <div class="promise-icon">👂</div>
+                    <h3>Seni Dinleyeceğim</h3>
+                    <p>Her derdin, her düşüncen önemli benim için. Bu sefer gerçekten kulak vereceğim.</p>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="promise-icon">💎</div>
+                    <h3>Kıymetini Bileceğim</h3>
+                    <p>Yanımda olduğun her saniyenin ne kadar değerli olduğunu bir daha unutmayacağım.</p>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="promise-icon">🌱</div>
+                    <h3>Birlikte Büyüyeceğiz</h3>
+                    <p>İkimiz de birbirimizi daha iyi yapacağız. Birlikte güçlü olacağız.</p>
+                </div>
+                <div class="promise-card reveal">
+                    <div class="promise-icon">🔥</div>
+                    <h3>Vazgeçmeyeceğim</h3>
+                    <p>Zor zamanlar olacak, biliyorum. Ama bu sefer kaçmayacağım, birlikte aşacağız.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final Question Section -->
+    <section class="question-section" id="questionSection">
+        <div class="question-container">
+            <div class="question-glow"></div>
+            <div class="question-hearts">
+                <span>💕</span><span>💗</span><span>💖</span>
+            </div>
+            <h2 class="question-title reveal">
+                <span class="question-line">Bi şans daha</span>
+                <span class="question-line highlight">verir misin?</span>
+            </h2>
+            <p class="question-sub reveal">tek istediğim bu...</p>
+            <div class="answer-buttons reveal">
+                <button class="answer-btn yes-btn" id="yesBtn">
+                    <span class="btn-emoji">❤️</span>
+                    <span>Evet, konuşalım</span>
+                </button>
+                <button class="answer-btn think-btn" id="thinkBtn">
+                    <span class="btn-emoji">💭</span>
+                    <span>Düşünmem lazım</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>bu sayfayı sana özel hazırladım ❤️</p>
+    </footer>
+
+    <!-- Yes Response Modal -->
+    <div class="modal-overlay" id="yesModal">
+        <div class="modal-content">
+            <div class="confetti-container" id="confettiContainer"></div>
+            <div class="modal-emoji-big">🥹</div>
+            <h2>Cidden Mi?!</h2>
+            <p>Ya çok mutlu ettin... Yemin ederim bu sefer her şey farklı olacak. ❤️</p>
+            <p class="modal-subtext">Hemen bi ara, konuşalım. Yeni bi sayfa açalım beraber. 🌹</p>
+            <button class="modal-close-btn" id="closeYesModal">Tamam 💕</button>
+        </div>
+    </div>
+
+    <!-- Think Response Modal -->
+    <div class="modal-overlay" id="thinkModal">
+        <div class="modal-content think-modal">
+            <div class="modal-emoji-big">🥺</div>
+            <h2>Tamam, Anladım</h2>
+            <p>Acele etme, düşün. Ben seni bekliyorum. Ne kadar sürerse sürsün...</p>
+            <p class="modal-subtext">Hazır olduğunda buradayım. Her zaman burada olacağım. 💛</p>
+            <button class="modal-close-btn think-close" id="closeThinkModal">Tamam 🤍</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
