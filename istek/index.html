@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Paneli</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #07060b;
+            color: #f0e6ff;
+            min-height: 100vh;
+            padding: 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #ff6b9d, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.25rem;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: rgba(240, 230, 255, 0.4);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff6b9d, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: rgba(240, 230, 255, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.25rem;
+        }
+
+        .stat-card.evet .stat-number {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            -webkit-background-clip: text;
+        }
+
+        .stat-card.dusun .stat-number {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            -webkit-background-clip: text;
+        }
+
+        .log-list {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .log-entry {
+            background: rgba(255, 255, 255, 0.035);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            padding: 1.25rem;
+            transition: all 0.2s;
+        }
+
+        .log-entry:hover {
+            border-color: rgba(255, 107, 157, 0.15);
+        }
+
+        .log-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .log-badge {
+            padding: 0.3rem 0.85rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .log-badge.evet {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+        }
+
+        .log-badge.dusun {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        .log-time {
+            font-size: 0.75rem;
+            color: rgba(240, 230, 255, 0.35);
+        }
+
+        .log-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.4rem;
+        }
+
+        .log-detail {
+            font-size: 0.78rem;
+            color: rgba(240, 230, 255, 0.5);
+        }
+
+        .log-detail span {
+            color: rgba(240, 230, 255, 0.8);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: rgba(240, 230, 255, 0.3);
+        }
+
+        .empty-state .emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .refresh-btn {
+            display: block;
+            margin: 0 auto 2rem;
+            padding: 0.6rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #f0e6ff;
+            font-family: inherit;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .refresh-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: rgba(240, 230, 255, 0.3);
+        }
+
+        @media (max-width: 400px) {
+            .log-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📊 Log Paneli</h1>
+        <p>Buton tıklamalarını takip et</p>
+    </div>
+
+    <button class="refresh-btn" onclick="loadLogs()">🔄 Yenile</button>
+
+    <div class="stats" id="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="totalCount">-</div>
+            <div class="stat-label">Toplam</div>
+        </div>
+        <div class="stat-card evet">
+            <div class="stat-number" id="yesCount">-</div>
+            <div class="stat-label">Evet</div>
+        </div>
+        <div class="stat-card dusun">
+            <div class="stat-number" id="thinkCount">-</div>
+            <div class="stat-label">Düşünmem lazım</div>
+        </div>
+    </div>
+
+    <div class="log-list" id="logList">
+        <div class="loading">Yükleniyor...</div>
+    </div>
+
+    <script>
+        async function loadLogs() {
+            const logList = document.getElementById('logList');
+            logList.innerHTML = '<div class="loading">Yükleniyor...</div>';
+
+            try {
+                const res = await fetch('/api/log');
+                const data = await res.json();
+                const logs = data.loglar || [];
+
+                // İstatistikler
+                document.getElementById('totalCount').textContent = logs.length;
+                document.getElementById('yesCount').textContent = logs.filter(l => l.buton === 'evet').length;
+                document.getElementById('thinkCount').textContent = logs.filter(l => l.buton === 'düşünmem lazım').length;
+
+                if (logs.length === 0) {
+                    logList.innerHTML = `
+                        <div class="empty-state">
+                            <div class="emoji">📭</div>
+                            <p>Henüz kimse tıklamadı</p>
+                        </div>`;
+                    return;
+                }
+
+                // En yeni en üstte
+                logList.innerHTML = logs.reverse().map(log => `
+                    <div class="log-entry">
+                        <div class="log-top">
+                            <span class="log-badge ${log.buton === 'evet' ? 'evet' : 'dusun'}">
+                                ${log.buton === 'evet' ? '❤️ Evet, konuşalım' : '💭 Düşünmem lazım'}
+                            </span>
+                            <span class="log-time">${log.tarih}</span>
+                        </div>
+                        <div class="log-details">
+                            <div class="log-detail">📱 <span>${log.cihaz?.cihazTuru || '?'}</span></div>
+                            <div class="log-detail">🌐 <span>${log.cihaz?.tarayici || '?'}</span></div>
+                            <div class="log-detail">💻 <span>${log.cihaz?.isletimSistemi || '?'}</span></div>
+                            <div class="log-detail">📐 <span>${log.cihaz?.ekranBoyutu || '?'}</span></div>
+                            <div class="log-detail">🌍 <span>${log.cihaz?.dil || '?'}</span></div>
+                            <div class="log-detail">🔗 <span>${log.ip || '?'}</span></div>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (err) {
+                logList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="emoji">⚠️</div>
+                        <p>Loglar yüklenemedi</p>
+                        <p style="font-size:0.75rem;margin-top:0.5rem">${err.message}</p>
+                    </div>`;
+            }
+        }
+
+        loadLogs();
+        // Her 10 saniyede otomatik yenile
+        setInterval(loadLogs, 10000);
+    </script>
+</body>
+</html>
